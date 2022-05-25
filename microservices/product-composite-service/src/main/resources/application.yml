@@ -1,5 +1,28 @@
+api:
+  common:
+    version: 1.0.0
+    title: Sample API
+    description: Description of the API...
+    termsOfServiceUrl: MINE TERMS OF SERVICE URL
+    license: License
+    licenseUrl: MY LICENSE URL
+
+    contact:
+      name: Contact
+      url: My
+      email: me@mail.com
+
+  product-composite:
+    get-composite-product:
+      description: Returns a composite view of the specified product id
+
+spring:
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+
 server:
-  port: 6999
+  port: 7000
   error:
     include-message: always
 

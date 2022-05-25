@@ -1,5 +1,6 @@
 package se.magnus.util.http;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Builder;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
@@ -8,6 +9,7 @@ import java.time.LocalDateTime;
 
 @Getter
 public class HttpErrorInfo {
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private final LocalDateTime timestamp;
     private final String path;
     private final HttpStatus httpStatus;
