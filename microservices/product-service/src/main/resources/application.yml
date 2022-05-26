@@ -2,13 +2,30 @@ server:
   port: 7001
   error:
     include-message: always
+spring:
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  mongodb:
+    embedded:
+      version: 3.4.0
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: product-db
+
 logging:
   level:
     root: INFO
     se.magnus: DEBUG
-
 ---
 spring:
   profiles: docker
+  data:
+    mongodb:
+      host: mongodb
 server:
   port: 8080
