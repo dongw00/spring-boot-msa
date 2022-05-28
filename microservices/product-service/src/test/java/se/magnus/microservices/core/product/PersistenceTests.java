@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -27,34 +28,22 @@ public class PersistenceTests {
 
     @Autowired
     private ProductRepository repository;
-
     private ProductEntity savedEntity;
-
 
     @BeforeEach
     public void setup() {
-
         repository.deleteAll();
 
-        ProductEntity entity = ProductEntity.builder()
-                .productId(1)
-                .name("n")
-                .weight(1)
-                .build();
+        ProductEntity entity = new ProductEntity(1, "n", 1);
 
         savedEntity = repository.save(entity);
-
         assertEqualsProduct(entity, savedEntity);
     }
 
     @DisplayName("생성 테스트")
     @Test
     public void create() {
-        ProductEntity newEntity = ProductEntity.builder()
-                .productId(2)
-                .name("n")
-                .weight(2)
-                .build();
+        ProductEntity newEntity = new ProductEntity(2, "n", 2);
 
         repository.save(newEntity);
 
@@ -92,6 +81,13 @@ public class PersistenceTests {
         assertEqualsProduct(savedEntity, entity.get());
     }
 
+    @DisplayName("중복키 테스트")
+    @Test
+    public void duplicateError() {
+        assertThrows(DuplicateKeyException.class,
+                () -> repository.save(new ProductEntity(savedEntity.getProductId(), "n", 1)));
+    }
+
     @DisplayName("낙관적 락 테스트")
     @Test
     public void optimisticLockError() {
@@ -124,10 +120,7 @@ public class PersistenceTests {
         repository.deleteAll();
 
         List<ProductEntity> newProducts = rangeClosed(1001, 1010)
-                .mapToObj(i -> ProductEntity.builder()
-                        .productId(i)
-                        .name("name " + i)
-                        .weight(1).build())
+                .mapToObj(i -> new ProductEntity(i, "name " + i, 1))
                 .collect(Collectors.toList());
 
         repository.saveAll(newProducts);
