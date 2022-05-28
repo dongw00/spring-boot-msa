@@ -8,9 +8,6 @@ spring:
     properties:
       hibernate:
         format_sql: true
-  mongodb:
-    embedded:
-      version: 3.4.0
   data:
     mongodb:
       host: localhost
@@ -21,11 +18,3 @@ logging:
   level:
     root: INFO
     se.magnus: DEBUG
----
-spring:
-  profiles: docker
-  data:
-    mongodb:
-      host: mongodb
-server:
-  port: 8080

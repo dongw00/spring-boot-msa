@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -14,7 +15,5 @@ public class Recommendation {
     private String author;
     private int rate;
     private String content;
-
-    @Setter
     private String serviceAddress;
 }

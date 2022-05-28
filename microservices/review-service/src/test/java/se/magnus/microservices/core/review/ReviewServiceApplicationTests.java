@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import se.magnus.api.core.review.Review;
 import se.magnus.microservices.core.review.persistence.ReviewRepository;
@@ -15,9 +16,8 @@ import static org.springframework.http.HttpStatus.*;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static reactor.core.publisher.Mono.just;
 
-@SpringBootTest(webEnvironment = RANDOM_PORT, properties = {
-        "spring.datasource.url=jdbc:h2:mem:review-db"
-})
+@SpringBootTest(webEnvironment = RANDOM_PORT)
+@ActiveProfiles("test")
 class ReviewServiceApplicationTests {
 
     @Autowired

@@ -5,12 +5,11 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
-import org.springframework.dao.DuplicateKeyException;
 import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.ActiveProfiles;
 import se.magnus.microservices.core.product.persistence.ProductEntity;
 import se.magnus.microservices.core.product.persistence.ProductRepository;
 
@@ -23,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.data.domain.Sort.Direction.ASC;
 
 @DataMongoTest
-@TestPropertySource(properties = "spring.mongodb.embedded.version=3.4.0")
+@ActiveProfiles("test")
 public class PersistenceTests {
 
     @Autowired
@@ -79,13 +78,6 @@ public class PersistenceTests {
 
         assertTrue(entity.isPresent());
         assertEqualsProduct(savedEntity, entity.get());
-    }
-
-    @DisplayName("중복키 테스트")
-    @Test
-    public void duplicateError() {
-        assertThrows(DuplicateKeyException.class,
-                () -> repository.save(new ProductEntity(savedEntity.getProductId(), "n", 1)));
     }
 
     @DisplayName("낙관적 락 테스트")

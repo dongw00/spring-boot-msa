@@ -6,16 +6,16 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.dao.OptimisticLockingFailureException;
-import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.ActiveProfiles;
 import se.magnus.microservices.core.recommendation.persistence.RecommendationEntity;
 import se.magnus.microservices.core.recommendation.persistence.RecommendationRepository;
 
-import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataMongoTest
-@TestPropertySource(properties = "spring.mongodb.embedded.version=3.4.0")
+@ActiveProfiles("test")
 public class PersistenceTests {
 
     @Autowired
@@ -65,11 +65,11 @@ public class PersistenceTests {
 
     @DisplayName("SELECT 테스트")
     @Test
-    public void getByProductId() {
-        List<RecommendationEntity> entityList = repository.findByProductId(savedEntity.getProductId());
+    public void getByRecommendationId() {
+        Optional<RecommendationEntity> entity = repository.findByRecommendationId(savedEntity.getRecommendationId());
 
-        assertEquals(2, entityList.size());
-        assertEqualsRecommendation(savedEntity, entityList.get(0));
+        assertTrue(entity.isPresent());
+        assertEqualsRecommendation(savedEntity, entity.get());
     }
 
     @DisplayName("낙관적락 테스트")

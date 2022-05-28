@@ -4,26 +4,17 @@ server:
     include-message: always
 
 spring:
-  mongodb:
-    embedded:
-      version: 3.4.0
   data:
     mongodb:
       host: localhost
       port: 27017
       database: recommendation-db
+  jpa:
+    show-sql: true
+    properties:
+      format_sql: true
 
 logging:
   level:
     root: INFO
     se.magnus: DEBUG
-
----
-spring:
-  profiles: docker
-
-  data:
-    mongodb:
-      host: mongodb
-
-server.port: 8080

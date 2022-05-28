@@ -1,0 +1,12 @@
+spring:
+  config:
+    activate:
+      on-profile: test
+  mongodb:
+    embedded:
+      version: 3.4.0
+  data:
+    mongodb:
+      host: localhost
+      port: 0
+      database: recommendation-db
