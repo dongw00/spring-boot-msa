@@ -1,10 +1,11 @@
 package se.magnus.api.core.review;
 
-import lombok.Builder;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 public class Review {
@@ -16,14 +17,4 @@ public class Review {
 
     @Setter
     private String serviceAddress;
-
-    @Builder
-    public Review(int productId, int reviewId, String author, String subject, String content, String serviceAddress) {
-        this.productId = productId;
-        this.reviewId = reviewId;
-        this.author = author;
-        this.subject = subject;
-        this.content = content;
-        this.serviceAddress = serviceAddress;
-    }
 }

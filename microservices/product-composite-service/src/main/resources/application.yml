@@ -15,6 +15,10 @@ api:
   product-composite:
     get-composite-product:
       description: Returns a composite view of the specified product id
+    create-composite-product:
+      description: Creates a composite product
+    delete-composite-product:
+      description: Deletes a product composite
 
 spring:
   jackson:
