@@ -3,12 +3,29 @@ server:
   error:
     include-message: always
 
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:mysql://localhost/review-db
+    username: root
+    password:
+    hikari:
+      initialization-fail-timeout: 60000
+
 logging:
   level:
     root: INFO
     se.magnus: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.descriptor.sql.BasicBinder: TRACE
 
 ---
-spring.profiles: docker
+spring:
+  profiles: docker
+
+  datasource:
+    url: jdbc:mysql://mysql/review-db
 
 server.port: 8080
