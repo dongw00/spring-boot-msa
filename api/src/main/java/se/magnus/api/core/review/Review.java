@@ -7,6 +7,7 @@ import lombok.Setter;
 
 @AllArgsConstructor
 @NoArgsConstructor
+@Setter
 @Getter
 public class Review {
     private int productId;
@@ -14,7 +15,5 @@ public class Review {
     private String author;
     private String subject;
     private String content;
-
-    @Setter
     private String serviceAddress;
 }
