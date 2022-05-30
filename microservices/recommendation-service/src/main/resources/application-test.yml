@@ -9,4 +9,4 @@ spring:
     mongodb:
       host: localhost
       port: 0
-      database: recommendation-db
+      database: recommendation_db
