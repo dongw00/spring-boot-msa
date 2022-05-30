@@ -9,10 +9,6 @@ spring:
       host: localhost
       port: 27017
       database: recommendation_db
-  jpa:
-    show-sql: true
-    properties:
-      format_sql: true
 
 logging:
   level:

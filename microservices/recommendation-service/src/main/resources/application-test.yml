@@ -7,6 +7,4 @@ spring:
       version: 3.4.0
   data:
     mongodb:
-      host: localhost
       port: 0
-      database: recommendation_db
