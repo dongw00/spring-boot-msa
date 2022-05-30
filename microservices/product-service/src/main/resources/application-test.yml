@@ -9,4 +9,4 @@ spring:
     mongodb:
       host: localhost
       port: 0
-      database: product-db
+      database: product_db

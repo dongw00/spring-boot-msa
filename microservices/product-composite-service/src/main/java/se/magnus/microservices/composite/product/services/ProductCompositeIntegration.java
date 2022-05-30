@@ -42,8 +42,8 @@ public class ProductCompositeIntegration implements ProductService, Recommendati
         this.objectMapper = objectMapper;
 
         this.productServiceUrl = "http://" + productServiceHost + ":" + productServicePort + "/product/";
-        this.recommendationServiceUrl = "http://" + recommendationServiceHost + ":" + recommendationServicePort + "/recommendation?productId=";
-        this.reviewServiceUrl = "http://" + reviewServiceHost + ":" + reviewServicePort + "/review?productId=";
+        this.recommendationServiceUrl = "http://" + recommendationServiceHost + ":" + recommendationServicePort + "/recommendation";
+        this.reviewServiceUrl = "http://" + reviewServiceHost + ":" + reviewServicePort + "/review";
     }
 
     @Override
@@ -99,7 +99,7 @@ public class ProductCompositeIntegration implements ProductService, Recommendati
     @Override
     public Recommendation createRecommendation(Recommendation body) {
         try {
-            String url = reviewServiceUrl;
+            String url = recommendationServiceUrl;
             log.debug("Will post a new recommendation to URL: {}", url);
 
             Recommendation recommendation = restTemplate.postForObject(url, body, Recommendation.class);
@@ -114,7 +114,7 @@ public class ProductCompositeIntegration implements ProductService, Recommendati
     @Override
     public List<Recommendation> getRecommendations(int productId) {
         try {
-            String url = recommendationServiceUrl + productId;
+            String url = recommendationServiceUrl + "?productId=" + productId;
             log.debug("Will call getRecommendations API on URL: {}", url);
 
             List<Recommendation> recommendations = restTemplate.exchange(url, GET, null, new ParameterizedTypeReference<List<Recommendation>>() {
@@ -157,7 +157,7 @@ public class ProductCompositeIntegration implements ProductService, Recommendati
     @Override
     public List<Review> getReviews(int productId) {
         try {
-            String url = reviewServiceUrl + productId;
+            String url = reviewServiceUrl + "?productId=" + productId;
             log.debug("Will call gotReviews API on URL: {}", url);
 
             List<Review> reviews = restTemplate.exchange(url, GET, null, new ParameterizedTypeReference<List<Review>>() {
