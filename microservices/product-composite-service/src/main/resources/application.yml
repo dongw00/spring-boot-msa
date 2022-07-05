@@ -24,6 +24,32 @@ spring:
   jackson:
     serialization:
       write-dates-as-timestamps: false
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
+
+  cloud.stream:
+    defaultBinder: rabbit
+    default.contentType: application/json
+    bindings:
+      output-products:
+        destination: products
+        producer:
+          required-groups: auditGroup
+      output-recommendations:
+        destination: recommendations
+        producer:
+          required-groups: auditGroup
+      output-reviews:
+        destination: reviews
+        producer:
+          required-groups: auditGroup
+
+    kafka.binder:
+      brokers: 127.0.0.1
+      defaultBrokerPort: 9092
 
 server:
   port: 7000

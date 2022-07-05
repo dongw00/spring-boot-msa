@@ -40,6 +40,11 @@ dependencies {
     implementation 'org.mapstruct:mapstruct-processor:1.4.2.Final'
     annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
     testAnnotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
+
+    // massaging
+    implementation 'org.springframework.cloud:spring-cloud-starter-stream-rabbit'
+    implementation 'org.springframework.cloud:spring-cloud-starter-stream-kafka'
+    testImplementation 'org.springframework.cloud:spring-cloud-stream-test-support'
 }
 
 tasks.named('test') {

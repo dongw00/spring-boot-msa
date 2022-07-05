@@ -23,6 +23,9 @@ dependencies {
     implementation project(':api')
     implementation project(':util')
 
+    // spring-cloud
+    implementation platform('org.springframework.cloud:spring-cloud-dependencies:2021.0.3')
+
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
     compileOnly 'org.projectlombok:lombok'
@@ -36,6 +39,11 @@ dependencies {
 
     // swagger
     implementation 'io.springfox:springfox-boot-starter:3.0.0'
+
+    // massaging
+    implementation 'org.springframework.cloud:spring-cloud-starter-stream-rabbit'
+    implementation 'org.springframework.cloud:spring-cloud-starter-stream-kafka'
+    testImplementation 'org.springframework.cloud:spring-cloud-stream-test-support'
 }
 
 tasks.named('test') {

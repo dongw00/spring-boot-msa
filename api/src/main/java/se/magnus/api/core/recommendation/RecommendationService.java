@@ -1,8 +1,7 @@
 package se.magnus.api.core.recommendation;
 
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import reactor.core.publisher.Flux;
 
 public interface RecommendationService {
 
@@ -33,7 +32,7 @@ public interface RecommendationService {
     @GetMapping(
             value = "/recommendation",
             produces = "application/json")
-    List<Recommendation> getRecommendations(@RequestParam(value = "productId") int productId);
+    Flux<Recommendation> getRecommendations(@RequestParam(value = "productId") int productId);
 
     /**
      * Sample usage:
